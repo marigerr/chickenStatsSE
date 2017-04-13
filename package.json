@@ -1,7 +1,7 @@
 {
-  "name": "bigtrees-webpack",
+  "name": "chicken-sweden",
   "version": "1.0.0",
-  "description": "redoing the big trees with webpack",
+  "description": "chickens change between 2005 and 2016",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist ",
@@ -15,7 +15,6 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "leaflet": "^1.0.3",
-    "leaflet.markercluster": "^1.0.4",
     "sidebar-v2": "^0.3.1"
   },
   "devDependencies": {

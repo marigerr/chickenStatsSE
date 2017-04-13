@@ -24,7 +24,7 @@ module.exports = {
               enforce: "pre", // preload the jshint loader
               exclude: /node_modules/, // exclude any and all files in the node_modules folder
               use: [{loader: "jshint-loader",
-                            options: { camelcase: true, emitErrors: false, failOnHint: false, esversion: 6 }}]
+                            options: { emitErrors: false, failOnHint: false, esversion: 6 }}]
             },
             { test: /\.js$/,
               exclude: [/node_modules/],
