@@ -1,0 +1,17 @@
+﻿{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Obj_idnr": 61446, "Kommun": "Gnosjö", "Lokalnamn": "Åsenhöga, Tostabo", "Xkoord": 6363015.0, "Ykoord": 427892.0, "Tradslag": "Ek-släktet", "Stamomkret": 515, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.799919052704137, 57.404179396400416 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 61684, "Kommun": "Gnosjö", "Lokalnamn": "Norrebo", "Xkoord": 6357262.0, "Ykoord": 428336.0, "Tradslag": "Ask", "Stamomkret": 520, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.808982790385663, 57.352581869753955 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 65200, "Kommun": "Gnosjö", "Lokalnamn": "Lid", "Xkoord": 6356094.528, "Ykoord": 425321.877, "Tradslag": "Alm-släktet", "Stamomkret": 516, "Tradstatus": "Klart försämrad" }, "geometry": { "type": "Point", "coordinates": [ 13.759256525551722, 57.341613111244619 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11320, "Kommun": "Gnosjö", "Lokalnamn": "Lid", "Xkoord": 6356021.595, "Ykoord": 425224.526, "Tradslag": "Ask", "Stamomkret": 509, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.757661633216182, 57.340942155827186 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11324, "Kommun": "Gnosjö", "Lokalnamn": "Lid", "Xkoord": 6356094.0, "Ykoord": 425331.703, "Tradslag": "Alm", "Stamomkret": 557, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.759419896414231, 57.341609978338283 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11348, "Kommun": "Gnosjö", "Lokalnamn": "Vattentornet", "Xkoord": 6358725.301, "Ykoord": 425134.506, "Tradslag": "Lind", "Stamomkret": 560, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.755344866481844, 57.365208992609539 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11351, "Kommun": "Gnosjö", "Lokalnamn": "Aggarp", "Xkoord": 6347618.886, "Ykoord": 426953.325, "Tradslag": "Ek", "Stamomkret": 510, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.788860064298403, 57.265757295388042 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11360, "Kommun": "Gnosjö", "Lokalnamn": "Ekholmen", "Xkoord": 6346157.0, "Ykoord": 425800.0, "Tradslag": "Bok", "Stamomkret": 517, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.770180064867052, 57.252442370932776 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11378, "Kommun": "Gnosjö", "Lokalnamn": "Kulltorp", "Xkoord": 6346965.167, "Ykoord": 426952.07, "Tradslag": "Ek", "Stamomkret": 531, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.789031937404847, 57.259885978128679 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11437, "Kommun": "Gnosjö", "Lokalnamn": "Stora Svalås", "Xkoord": 6360233.444, "Ykoord": 418712.555, "Tradslag": "Ek", "Stamomkret": 543, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.648112890116399, 57.377652318041186 ] } },
+{ "type": "Feature", "properties": { "Obj_idnr": 11475, "Kommun": "Gnosjö", "Lokalnamn": "Broddhult", "Xkoord": 6360960.529, "Ykoord": 427178.07, "Tradslag": "Ek", "Stamomkret": 587, "Tradstatus": "Friskt" }, "geometry": { "type": "Point", "coordinates": [ 13.788649158009358, 57.38561465701563 ] } }
+]
+}

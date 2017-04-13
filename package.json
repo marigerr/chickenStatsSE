@@ -1,9 +1,10 @@
 {
-  "name": "leaflet-with-webpack",
+  "name": "bigtrees-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "redoing the big trees with webpack",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist ",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
     "start": "node_modules/.bin/webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chart.js": "^2.5.0"
+    "jquery": "^3.2.1",
+    "leaflet": "^1.0.3",
+    "leaflet.markercluster": "^1.0.4",
+    "sidebar-v2": "^0.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -22,7 +26,6 @@
     "file-loader": "^0.11.1",
     "jshint": "^2.9.4",
     "jshint-loader": "^0.8.4",
-    "leaflet": "^1.0.3",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2"

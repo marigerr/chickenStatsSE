@@ -1,4 +1,4 @@
-var path = require('path');
+    var path = require('path');
 
 module.exports = {
     context: path.resolve(__dirname, './src'),
@@ -7,7 +7,6 @@ module.exports = {
             filename: '[name].bundle.js',
             path: path.resolve(__dirname, 'dist/assets'),
             publicPath: '/assets'},
-    watch: true,
     devtool: "cheap-eval-source-map",
     devServer: {
         contentBase: path.resolve(__dirname, './src'),
@@ -33,7 +32,7 @@ module.exports = {
             },
             {
                 test: /\.(woff2?|ttf|eot|jpe?g|png|gif|svg)$/,
-                loader: 'file-loader'
+                use: [{loader: 'file-loader?name=img/[name].[ext]'}] 
             }                        
         ]
     }
