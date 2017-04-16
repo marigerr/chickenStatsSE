@@ -1,4 +1,5 @@
-    var path = require('path');
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, './src'),
@@ -14,6 +15,9 @@ module.exports = {
         compress: true,
         port: 8080
     },
+    plugins: [new HtmlWebpackPlugin({
+        title: 'new Chickens!',
+    })],
     module: {
         rules: [
             { test: /\.css$/,
@@ -22,12 +26,12 @@ module.exports = {
             },
             { test: /\.js$/, // include .js files
               enforce: "pre", // preload the jshint loader
-              exclude: /node_modules/, // exclude any and all files in the node_modules folder
+              exclude: [/node_modules/, /selectCtrl/], // exclude any and all files in the node_modules folder
               use: [{loader: "jshint-loader",
                             options: { emitErrors: false, failOnHint: false, esversion: 6 }}]
             },
             { test: /\.js$/,
-              exclude: [/node_modules/],
+              exclude: [/node_modules/, /selectCtrl/],
               use: [{ loader: 'babel-loader', options: { presets: ['es2015'] }}],
             },
             {

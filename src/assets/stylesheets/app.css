@@ -2,9 +2,11 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+
 }
 
-#mapid { height: 100%; }
+#mapid { height: 100%;}
+   /*background-color:black;}*/
 
 .info {
     padding: 6px 8px;
@@ -18,3 +20,56 @@ html, body {
     margin: 0 0 5px;
     color: #777;
 }
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 30px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+#statsSelect {
+    border-radius:4px;   
+    font: 16px Arial, Helvetica, sans-serif;   
+    background: white;
+    background: rgba(255,255,255,0.8);  
+}
+
+/*select {*/
+  /*margin: 50px;*/
+  /*border: 1px solid #111;
+  border-radius:4px;  
+  background: transparent;
+  width: 150px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;*/
+  /*background: url(http://www.stackoverflow.com/favicon.ico) 96% / 15% no-repeat #eee;*/
+  /*background: #eee;
+  
+}*/
+
+
+/* CAUTION: IE hackery ahead */
+
+
+/*select::-ms-expand { */
+    /*display: none;  remove default arrow in IE 10 and 11 */
+/*}*/
+
+/* target Internet Explorer 9 to undo the custom arrow */
+/*@media screen and (min-width:0\0) {
+    select {
+        background:none\9;
+        padding: 5px\9;
+    }
+}*/

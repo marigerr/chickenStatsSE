@@ -1,13 +1,39 @@
-export default function getColor(d){
-
-     return d > 400 ? '#053061' :
-           d > 200  ? '#67a9cf' :
-           d > 50   ? '#92c5de' :
-           d > 10   ? '#d1e5f0' :
-           d > -11   ? '#ffffff' :
-           d > -25   ? '#f4a582' :
-                        '#d6604d';
-                    //   '#b2182b';
+export default function getColor(d, stats){
+    // var breakpointsArr = [400,200,50,10,-11,-25];
+    var breakpointsArr = stats.breakpoints;
+    // console.log(d);
+    // console.log("stats breakpoints= " + stats.breakpoints);
+    var colorArray;
+    if (stats.statType === "ChickenIncreasePercent"){
+        colorArray = ['#053061','#2166ac','#4393c3','#92c5de','#ffffff','#f4a582', '#d6604d'];
+    } else { 
+        colorArray = ['#053061','#2166ac','#4393c3','#92c5de','#B3D6E8','#DEEEF5', '#ffffff'];
+    }
+     return d >= breakpointsArr[0]  ? colorArray[0]  :
+            d >= breakpointsArr[1]  ? colorArray[1]  :
+            d >= breakpointsArr[2]  ? colorArray[2]  :
+            d >= breakpointsArr[3]  ? colorArray[3]  :
+            d >= breakpointsArr[4]  ? colorArray[4]  :
+            d >= breakpointsArr[5]  ? colorArray[5]  :
+                                      colorArray[6]  ;
+    //  return d >= 400  ? '#053061' :
+    //         d >= 200  ? '#2166ac' :
+    //         d >= 50   ? '#4393c3' :
+    //         d >= 10   ? '#92c5de' :
+    //         d >= -11  ? '#ffffff' :
+    //         d >= -25  ? '#f4a582' :
+    //                     '#d6604d';
+    // } 
+    //else if (stats.statType=== "Höns_2016_1"){
+    //  return d >= 400  ? '#053061' :
+    //         d >= 200  ? '#2166ac' :
+    //         d >= 50   ? '#4393c3' :
+    //         d >= 10   ? '#92c5de' :
+    //         d >= -11  ? '#ffffff' :
+    //         d >= -25  ? '#f4a582' :
+    //                     '#d6604d';
+    // } 
+    
 
 
     // treeType = treeType.toLowerCase();
