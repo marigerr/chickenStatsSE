@@ -10,13 +10,13 @@ module.exports = {
             publicPath: '/assets'},
     devtool: "cheap-eval-source-map",
     devServer: {
-        contentBase: path.resolve(__dirname, './src'),
+        contentBase: path.resolve(__dirname, './dist/assets'),
         watchOptions: { poll: true },
         compress: true,
         port: 8080
     },
     plugins: [new HtmlWebpackPlugin({
-        title: 'new Chickens!',
+        template: __dirname + '/src/index.html'
     })],
     module: {
         rules: [
@@ -37,7 +37,11 @@ module.exports = {
             {
                 test: /\.(woff2?|ttf|eot|jpe?g|png|gif|svg)$/,
                 use: [{loader: 'file-loader?name=img/[name].[ext]'}] 
-            }                        
+            },
+            {
+                test: /\.geojson$/,
+                use: [{loader: 'file-loader?name=GeoJson/[name].[ext]'}] 
+            }                                    
         ]
     }
 };

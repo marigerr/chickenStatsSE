@@ -6,6 +6,13 @@ import 'leaflet/dist/leaflet.css';
 // import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import styles from './assets/stylesheets/app.css';
 import getColor from './getColor';
+require.context("./GeoJson", true, /\.geojson$/);
+
+
+// var elemDiv = document.createElement('div');
+// document.body.appendChild(elemDiv);
+
+// $('body').prepend('<div id="mapid"></div>');
 
 
 var dark = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
