@@ -6,11 +6,11 @@ module.exports = {
     entry: { app: './app.js'},
     output: { 
             filename: '[name].bundle.js',
-            path: path.resolve(__dirname, 'dist/assets'),
-            publicPath: '/assets'},
+            path: path.resolve(__dirname, 'dist/')
+            },
     devtool: "cheap-eval-source-map",
     devServer: {
-        contentBase: path.resolve(__dirname, './dist/assets'),
+        contentBase: path.resolve(__dirname, './dist/'),
         watchOptions: { poll: true },
         compress: true,
         port: 8080
@@ -41,7 +41,7 @@ module.exports = {
             {
                 test: /\.geojson$/,
                 use: [{loader: 'file-loader?name=GeoJson/[name].[ext]'}] 
-            }                                    
+            }                                            
         ]
     }
 };

@@ -1,18 +1,11 @@
 import $ from 'jquery';
 import 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// import 'leaflet.markercluster';
-// import 'leaflet.markercluster/dist/MarkerCluster.css';
-// import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import styles from './assets/stylesheets/app.css';
+import styles from './stylesheets/app.css';
 import getColor from './getColor';
 require.context("./GeoJson", true, /\.geojson$/);
 
 
-// var elemDiv = document.createElement('div');
-// document.body.appendChild(elemDiv);
-
-// $('body').prepend('<div id="mapid"></div>');
 
 
 var dark = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -39,17 +32,13 @@ var satellite = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
     accessToken: 'pk.eyJ1IjoibWFyaWdlcnIiLCJhIjoiY2l6NDgxeDluMDAxcjJ3cGozOW1tZnV0NCJ9.Eb2mDsjDBmza-uhme0TLSA'
 });
 
-// var none = L.tileLayer();
-
 var baseLayers = {
     "Dark": dark,
     "Topo": topo,
     "Satellite": satellite,
-    // "None": none
 };
 
-// var map = L.map('mapid');//.setView([51.505, -0.09], 5);
-var map = L.map('mapid', {layers: [dark]});//.setView([51.505, -0.09], 5);
+var map = L.map('mapid', {layers: [dark]});
 L.control.layers(baseLayers,{},{position : 'topleft'}).addTo(map);
 
 var selectCtrl = L.control({position: 'topright'});
@@ -84,11 +73,7 @@ function getBreakpoints(statType){
      return statType == "ChickenIncreasePercent"  ? [400,200,50,10,-11,-25] :
             statType == "Höns_2005_1" ? [1000000,500000,100000,50000,25000,0] :
             statType == "Höns_2016_1" ? [1000000,500000,100000,50000,25000,0] :
-            statType == "ChickenPerKm2" ? [150,125,100,50,25,0] :
-            // statType == ""   ? '#92c5de' :
-            // statType == ""  ? '#ffffff' :
-            // statType == ""  ? '#f4a582' :
-                        [400,200,50,10,-11,-25];
+                                        [400,200,50,10,-11,-25];
 }
 
 var geojsonLayer;               
@@ -97,23 +82,14 @@ var chickenData;
 $.getJSON("./GeoJson/LanWithChickensV2.geojson", function(data){
     chickenData = data;
     success(chickenData);
-    // console.log(chickenData);
-    // geojsonLayer.addData(HaboTrees, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
-    // console.log(geojsonLayer._layers);
-    // map.fitBounds(geojsonLayer.getBounds());
 });
 
 function success(data){
-    geojsonLayer = L.geoJSON(data, {style: style, onEachFeature: onEachFeature}).addTo(map); //, {pointToLayer: pointToLayer, onEachFeature: onEachFeature}
-    // markers.addLayer(geojsonLayer);
-    // map.addLayer(markers);
-    // console.log(geojsonLayer);
+    geojsonLayer = L.geoJSON(data, {style: style, onEachFeature: onEachFeature}).addTo(map); //, {pointToLayer: 
 	map.setView(geojsonLayer.getBounds().getCenter(), 5);
 }
 
 function style(feature) {
-    // console.log(stats.statType);
-    // console.log(feature.properties[stats.statType]);
     return {
         fillColor: getColor(feature.properties[stats.statType], stats),
         weight: 2,
@@ -126,7 +102,6 @@ function style(feature) {
 
 function highlightFeature(e) {
     geojsonLayer.resetStyle(e.target);
-    // console.log(e.target);
     info.update();
     var layer = e.target;
 
@@ -167,15 +142,10 @@ function numberWithCommas(x) {
 var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
-    // console.log("stats from legendAdd function "+ stats.statType);
     var div = L.DomUtil.create('div', 'info legend'),
-        // grades = [-40, -25, -10, 10, 50, 200, 400],
         labels = [];
 
     var reversedBreaks = stats.breakpoints.slice().reverse();
-    
-
-    // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < stats.breakpoints.length; i++) {
         div.innerHTML +=
             '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
@@ -192,13 +162,9 @@ function updateLegend(){
     var newLegendContent = '';
     var reversedBreaks = stats.breakpoints.slice().reverse();
     for (var i = 0; i < stats.breakpoints.length; i++) {
-        // console.log(reversedBreaks);
-        // console.log(i);
-        
         newLegendContent += '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
             numberWithCommas(reversedBreaks[i]) + 
             (reversedBreaks[i+1] ? ' to ' + numberWithCommas(reversedBreaks[i+1]) + '<br>' : '+');
-    // console.log(newLegendContent);
     } 
     $(".info.legend.leaflet-control").html(newLegendContent);      
 }
@@ -223,51 +189,4 @@ info.update = function (props) {
 };
 
 info.addTo(map);
-
-// function pointToLayer(feature, latlng) {
-  
-//     var radius;
-//     var x = feature.properties.Stamomkret;
-//     switch (true) {
-//     case (x < 1000):
-//         // console.log("less than six hundred");
-//         radius = 5;
-//         break;
-//     case (x >= 1000  && x < 1500):
-//         // alert("between 5 and 8");
-//         radius = 10;
-//         break;
-//     case (x >= 1500):
-//         // alert("between 9 and 11");
-//         radius = 15;
-//         break;
-//     default:
-//         console.log("error with radius");
-//         break;
-//     }
-//     return new L.CircleMarker(latlng, {
-//         radius: radius,
-//         // fillColor: colors[feature.properties.Tradslag],
-//         fillColor: getColor(feature.properties.Tradslag),
-//         color: getColor(feature.properties.Tradslag),
-//         weight: 1,
-//         opacity: 1,
-//         fillOpacity: 1,
-//         clickable: true
-//     });
-// }
-
-// function onEachFeature(feature, layer) {
-//         // console.log(feature);
-// 		var popupContent = "";
-// 		if (feature.properties) {
-//             popupContent += "Id: " + feature.properties.Obj_idnr + "</br>";
-// 			popupContent += "Stamomkret: " + feature.properties.Stamomkret + " cm</br>";
-//             popupContent += "Tradslag: " + feature.properties.Tradslag + "</br>";
-//             popupContent += "Status: " + feature.properties.Tradstatus + "</br>";            
-// 		}
-// 		layer.bindPopup(popupContent);
-//         // markers.addLayer(layer);
-// }
-
 

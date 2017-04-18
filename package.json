@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist ",
     "build": "node_modules/.bin/webpack --config webpack.config.js",
+    "buildP": "node_modules/.bin/webpack -p --config webpack.config.js",
     "start": "node_modules/.bin/webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

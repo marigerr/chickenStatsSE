@@ -1,0 +1,12 @@
+{
+    test: /.surgeignore$/,
+    use: [{loader: 'file-loader?name=surge/[name].[ext]'}] 
+},  
+{
+    test: /CNAME$/,
+    use: [{loader: 'file-loader?surge/name=[name]'}] 
+}  
+
+
+require.context("./", false, /CNAME$/);
+require.context("./", false, /.surgeignore$/);
