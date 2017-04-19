@@ -100,27 +100,31 @@ function style(feature) {
     };
 }
 
+var lastLayerSelected;
 function highlightFeature(e) {
-    geojsonLayer.resetStyle(e.target);
-    info.update();
+    if(lastLayerSelected) geojsonLayer.resetStyle(lastLayerSelected);
+    // info.update();
     var layer = e.target;
-
+    lastLayerSelected = layer;
+    layer.openPopup();
+    // console.log(layer);
     layer.setStyle({
         weight: 5,
         color: '#666',
         dashArray: '',
         fillOpacity: 0.7
     });
+    // console.log(layer);
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature.properties);
+    // info.update(layer.feature.properties);
 }
 
 function resetHighlight(e) {
     geojsonLayer.resetStyle(e.target);
-    info.update();
+    // info.update();
 }
 
 function zoomToFeature(e) {
@@ -128,9 +132,10 @@ function zoomToFeature(e) {
 }
 
 function onEachFeature(feature, layer) {
+    layer.bindPopup(createPopup(feature.properties));
     layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
+        // mouseover: highlightFeature,
+        // mouseout: resetHighlight,
         click: highlightFeature
     });
 }
@@ -169,24 +174,31 @@ function updateLegend(){
     $(".info.legend.leaflet-control").html(newLegendContent);      
 }
 
-var info = L.control({position: 'bottomright'});
+function createPopup(props) {
+    var popup = '<h4>Region :' + props.LnNamn + '</h4><br />' +
+        '2005: ' + numberWithCommas(props.Höns_2005_1) + '<br />' +
+        '2016: ' + numberWithCommas(props.Höns_2016_1) +  
+        ' (' + Math.round(props.ChickenIncreasePercent) + '% change' + ')' + '<br />' +
+        '2016: Chickens per km2: ' + props.ChickenPerKm2;
+    return popup;
+}
+// var info = L.control({position: 'bottomright'});
 
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
+// info.onAdd = function (map) {
+//     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+//     this.update();
+//     return this._div;
+// };
 
 // method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this._div.innerHTML = '<h4>Chicken Stats</h4>' +  (props ?
-        '<b>' + props.LnNamn + '</b><br />' + 
-        '2005: ' + numberWithCommas(props.Höns_2005_1) + '<br />' +
-        '2016: ' + numberWithCommas(props.Höns_2016_1) + '<br />' + 
-        props.ChickenIncreasePercent + '% change' + '<br />' +
-        'Chickens per km2: ' + props.ChickenPerKm2 
-        : 'Click on a region to see more details');
-};
+// info.update = function (props) {
+//     this._div.innerHTML = '<h4>Chicken Stats</h4>' +  (props ?
+//         '<b>' + props.LnNamn + '</b><br />' + 
+//         '2005: ' + numberWithCommas(props.Höns_2005_1) + '<br />' +
+//         '2016: ' + numberWithCommas(props.Höns_2016_1) + '<br />' + 
+//         props.ChickenIncreasePercent + '% change' + '<br />' +
+//         'Chickens per km2: ' + props.ChickenPerKm2 
+//         : 'Click on a region to see more details');
+// };
 
-info.addTo(map);
-
+// info.addTo(map);
