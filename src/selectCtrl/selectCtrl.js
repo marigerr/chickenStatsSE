@@ -2,7 +2,7 @@ L.Control.Select = L.Control.extend({
 //   _className: 'leaflet-control-measure',   add Styling for select ctrl later
   options: {
     position: 'topright',
-    selectOption : {}
+    selectOption : {},
     popupOptions: {             // standard leaflet popup options http://leafletjs.com/reference.html#popup-options
       className: 'leaflet-measure-resultpopup',
       autoPanPadding: [10, 10]

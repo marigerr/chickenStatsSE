@@ -216,3 +216,5 @@ node_modules
 #Misc
 InstructionsLite-server.txt
 .vscode
+.surgeignore
+needToFix.txt
