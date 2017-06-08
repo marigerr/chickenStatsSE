@@ -197,9 +197,9 @@ function updateLegend() {
 function createPopup(props) {
     var popup = 'Region: ' + props.LnNamn + '</br>' +
         '2005: ' + numberWithCommas(props.Höns_2005_1) + '</br>' +
-        '2016: ' + numberWithCommas(props.Höns_2016_1) +
-        ' (' + Math.round(props.ChickenIncreasePercent) + '% change' + ')' + '</br>' +
-        '2016: Chickens per km2: ' + Math.round(props.ChickenPerKm2);
+        '2016: ' + numberWithCommas(props.Höns_2016_1) + '</br>' +
+        Math.round(props.ChickenIncreasePercent) +
+        '% change' + '</br>';
     return popup;
 }
 
