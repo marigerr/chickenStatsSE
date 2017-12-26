@@ -47,10 +47,10 @@ var selectCtrl = L.control({ position: 'topleft' });
 selectCtrl.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'selectCtrl');
   div.innerHTML = '<select id="statsSelect">' +
-        '<option selected value="">Select Stats</option>' +
+        '<option selected value="">Select Chicken Stats</option>' +
         '<option value="Höns_2005_1">Chickens per Region 2005</option>' +
         '<option value="Höns_2016_1">Chickens per Region 2016</option>' +
-        '<option value="ChickenIncreasePercent">Chicken Increase 2005-2016</option>' +
+        '<option value="ChickenIncreasePercent">Percent Change 2005-2016</option>' +
         '<option value="ChickenPerKm2">Chickens per km2</option>' +
         '</select>';
   div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
@@ -159,13 +159,13 @@ var legend = L.control({ position: 'topleft' });
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
     labels = [];
-  div.innerHTML += '<span>Chickens Increase 2005-2016</span><br>';
+  div.innerHTML += '<span>Percent Change 2005-2016</span><br>';
 
   var reversedBreaks = stats.breakpoints.slice().reverse();
   for (var i = 0; i < stats.breakpoints.length; i++) {
     div.innerHTML +=
             '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
-            reversedBreaks[i] + (reversedBreaks[i + 1] ? '% to ' + reversedBreaks[i + 1] + '%<br>' : '% +');
+            reversedBreaks[i] + (reversedBreaks[i + 1] ? '% to ' + reversedBreaks[i + 1] + '%<br>' : '% and above');
   }
 
   return div;
@@ -179,19 +179,17 @@ function updateLegend() {
   $(".info.legend.leaflet-control").empty();
   if (stats.title == "Select Stats") {
     return;
-  } else {
-
-    // var newLegendContent = '';
-    var newLegendContent = '<span>' + stats.title + '</span><br>';
-    var reversedBreaks = stats.breakpoints.slice().reverse();
-    for (var i = 0; i < stats.breakpoints.length; i++) {
-      newLegendContent += '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
+  } 
+  // var newLegendContent = '';
+  var newLegendContent = '<span>' + stats.title + '</span><br>';
+  var reversedBreaks = stats.breakpoints.slice().reverse();
+  for (var i = 0; i < stats.breakpoints.length; i++) {
+    newLegendContent += '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
                 numberWithCommas(reversedBreaks[i]) +
                 (reversedBreaks[i + 1] ? ' to ' + numberWithCommas(reversedBreaks[i + 1]) + '<br>' : '+');
-    }
-    $(".info.legend.leaflet-control").html(newLegendContent);
-    map.setView(geojsonLayer.getBounds().getCenter(), 5);
   }
+  $(".info.legend.leaflet-control").html(newLegendContent);
+  map.setView(geojsonLayer.getBounds().getCenter(), 5);
 }
 
 function createPopup(props) {
