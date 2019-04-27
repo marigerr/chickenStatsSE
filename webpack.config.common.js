@@ -15,6 +15,8 @@ module.exports = {
       Components: path.resolve(__dirname, 'src/components/'),
       Data: path.resolve(__dirname, 'src/data/'),
       Stylesheets: path.resolve(__dirname, 'src/stylesheets/'),
+      Utilities: path.resolve(__dirname, 'src/utilities/'),
+      Data: path.resolve(__dirname, 'src/data/'),      
       // Modules: [path.resolve(__dirname, "./src"), "node_modules"]},
     }
   },
@@ -53,7 +55,7 @@ module.exports = {
         use: [{
           loader: "eslint-loader",
           // options: { emitErrors: false, failOnHint: false, esversion: 6 }
-          // options: { fix: true }
+          options: { fix: true }
         }]
       },
       {

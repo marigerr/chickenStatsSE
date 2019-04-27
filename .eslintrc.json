@@ -20,12 +20,14 @@
         "no-unreachable": "warn",
         "no-unused-vars": "warn",
         "constructor-super": "warn",
-        "valid-typeof": "warn"
+        "valid-typeof": "warn",
+        "no-nested-ternary" : "off",
+        "func-names": "off"
     },
     "settings": {
         "import/resolver": {
             "webpack": {
-                "config": "webpack.common.js"
+                "config": "webpack.config.common.js"
             }
         }
     }
