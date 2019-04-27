@@ -1,4 +1,4 @@
-export default function getColor(d, stats){
+export default function (d, stats){
   var breakpointsArr = stats.breakpoints;
   var colorArray;
   if (stats.statType === "ChickenIncreasePercent"){

@@ -1,13 +1,16 @@
-import $ from 'jquery';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/images/marker-icon.png';
+import 'leaflet/dist/images/marker-icon-2x.png';
+import 'leaflet/dist/images/marker-shadow.png';
+import 'leaflet/dist/images/layers.png';
+import 'leaflet/dist/images/layers-2x.png';
 import './stylesheets/app.css';
 import getColor from './getColor';
-// require.context("./GeoJson", true, /\.geojson$/);
+import chickenData from './GeoJson/LanWithChickensV2.js';
 
 var isMobile = mobileAndTabletcheck();
-console.log(isMobile);
+// console.log(isMobile);
 
 var dark = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -64,12 +67,9 @@ var stats = { statType: "ChickenIncreasePercent", breakpoints: [400, 200, 50, 10
 
 
 var geojsonLayer;
-var chickenData;
 
-$.getJSON("./GeoJson/LanWithChickensV2.json", function (data) {
-  chickenData = data;
-  success(chickenData);
-});
+geojsonLayer = L.geoJSON(chickenData, { style: style, onEachFeature: onEachFeature }).addTo(map); //, {pointToLayer: 
+map.setView(geojsonLayer.getBounds().getCenter(), 5);
 
 function changeStats(event) {
   stats.statType = event.target.value;
@@ -173,7 +173,6 @@ legend.onAdd = function (map) {
 
 selectCtrl.addTo(map);
 legend.addTo(map);
-
 
 function updateLegend() {
   $(".info.legend.leaflet-control").empty();
