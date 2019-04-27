@@ -49,16 +49,24 @@ L.control.zoom({ position: 'topright' }).addTo(map);
 var selectCtrl = L.control({ position: 'topleft' });
 selectCtrl.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'selectCtrl');
-  div.innerHTML = '<select id="statsSelect">' +
-    '<option selected value="">Select Chicken Stats</option>' +
+  div.innerHTML =
+    '<div><label id="statsSelectLabel" for="statsSelect">Select Chicken Stats</label></div>' +
+    '<div><select id="statsSelect">' +
     '<option value="Höns_2005_1">Chickens per Region 2005</option>' +
     '<option value="Höns_2016_1">Chickens per Region 2016</option>' +
-    '<option value="ChickenIncreasePercent">Percent Change 2005-2016</option>' +
+    '<option selected value="ChickenIncreasePercent">Percent Change 2005-2016</option>' +
     '<option value="ChickenPerKm2">Chickens per km2</option>' +
-    '</select>';
+    '</select></div>';
   div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-  L.DomEvent.on(div.firstChild, 'on change', changeStats);
+  L.DomEvent.on(div.childNodes[1], 'on change', changeStats);
 
+  return div;
+};
+
+var instructionCtrl = L.control({ position: 'bottomleft' });
+instructionCtrl.onAdd = function (map) {
+  var div = L.DomUtil.create('div', 'instructionCtrl');
+  div.innerHTML = 'Hover on region for regional stats';
   return div;
 };
 
@@ -119,7 +127,6 @@ function highlightFeature(e) {
     dashArray: '',
     fillOpacity: 0.7
   });
-  // console.log(layer);
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront();
@@ -171,6 +178,7 @@ legend.onAdd = function (map) {
 };
 
 selectCtrl.addTo(map);
+instructionCtrl.addTo(map);
 legend.addTo(map);
 
 function updateLegend() {
