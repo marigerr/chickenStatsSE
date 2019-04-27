@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.4.0",
     "leaflet": "^1.0.3"
   },
   "devDependencies": {

@@ -50,12 +50,12 @@ var selectCtrl = L.control({ position: 'topleft' });
 selectCtrl.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'selectCtrl');
   div.innerHTML = '<select id="statsSelect">' +
-        '<option selected value="">Select Chicken Stats</option>' +
-        '<option value="Höns_2005_1">Chickens per Region 2005</option>' +
-        '<option value="Höns_2016_1">Chickens per Region 2016</option>' +
-        '<option value="ChickenIncreasePercent">Percent Change 2005-2016</option>' +
-        '<option value="ChickenPerKm2">Chickens per km2</option>' +
-        '</select>';
+    '<option selected value="">Select Chicken Stats</option>' +
+    '<option value="Höns_2005_1">Chickens per Region 2005</option>' +
+    '<option value="Höns_2016_1">Chickens per Region 2016</option>' +
+    '<option value="ChickenIncreasePercent">Percent Change 2005-2016</option>' +
+    '<option value="ChickenPerKm2">Chickens per km2</option>' +
+    '</select>';
   div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
   L.DomEvent.on(div.firstChild, 'on change', changeStats);
 
@@ -64,8 +64,6 @@ selectCtrl.onAdd = function (map) {
 
 // selectCtrl.addTo(map);
 var stats = { statType: "ChickenIncreasePercent", breakpoints: [400, 200, 50, 10, -11, -25] };
-
-
 var geojsonLayer;
 
 geojsonLayer = L.geoJSON(chickenData, { style: style, onEachFeature: onEachFeature }).addTo(map); //, {pointToLayer: 
@@ -74,7 +72,8 @@ map.setView(geojsonLayer.getBounds().getCenter(), 5);
 function changeStats(event) {
   stats.statType = event.target.value;
   stats.breakpoints = getBreakpoints(stats.statType);
-  stats.title = $("#statsSelect option:selected").text();
+  const statsDD = document.getElementById("statsSelect");
+  stats.title = statsDD.options[statsDD.selectedIndex].text;
   // console.log(stats.breakpoints.reverse());
   map.removeLayer(geojsonLayer);
   geojsonLayer = L.geoJSON(chickenData, { style: style, onEachFeature: onEachFeature }).addTo(map);
@@ -164,8 +163,8 @@ legend.onAdd = function (map) {
   var reversedBreaks = stats.breakpoints.slice().reverse();
   for (var i = 0; i < stats.breakpoints.length; i++) {
     div.innerHTML +=
-            '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
-            reversedBreaks[i] + (reversedBreaks[i + 1] ? '% to ' + reversedBreaks[i + 1] + '%<br>' : '% and above');
+      '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
+      reversedBreaks[i] + (reversedBreaks[i + 1] ? '% to ' + reversedBreaks[i + 1] + '%<br>' : '% and above');
   }
 
   return div;
@@ -175,28 +174,26 @@ selectCtrl.addTo(map);
 legend.addTo(map);
 
 function updateLegend() {
-  $(".info.legend.leaflet-control").empty();
   if (stats.title == "Select Stats") {
     return;
-  } 
-  // var newLegendContent = '';
+  }
   var newLegendContent = '<span>' + stats.title + '</span><br>';
   var reversedBreaks = stats.breakpoints.slice().reverse();
   for (var i = 0; i < stats.breakpoints.length; i++) {
     newLegendContent += '<i style="background:' + getColor(reversedBreaks[i] + 1, stats) + '"></i> ' +
-                numberWithCommas(reversedBreaks[i]) +
-                (reversedBreaks[i + 1] ? ' to ' + numberWithCommas(reversedBreaks[i + 1]) + '<br>' : '+');
+      numberWithCommas(reversedBreaks[i]) +
+      (reversedBreaks[i + 1] ? ' to ' + numberWithCommas(reversedBreaks[i + 1]) + '<br>' : '+');
   }
-  $(".info.legend.leaflet-control").html(newLegendContent);
+  document.querySelectorAll(".info.legend.leaflet-control")[0].innerHTML = newLegendContent;
   map.setView(geojsonLayer.getBounds().getCenter(), 5);
 }
 
 function createPopup(props) {
   var popup = 'Region: ' + props.LnNamn + '</br>' +
-        '2005: ' + numberWithCommas(props.Höns_2005_1) + '</br>' +
-        '2016: ' + numberWithCommas(props.Höns_2016_1) + '</br>' +
-        Math.round(props.ChickenIncreasePercent) +
-        '% change' + '</br>';
+    '2005: ' + numberWithCommas(props.Höns_2005_1) + '</br>' +
+    '2016: ' + numberWithCommas(props.Höns_2016_1) + '</br>' +
+    Math.round(props.ChickenIncreasePercent) +
+    '% change' + '</br>';
   return popup;
 }
 
