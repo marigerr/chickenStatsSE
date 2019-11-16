@@ -25,13 +25,14 @@ function numberWithCommas(x) {
 }
 
 function updateLegend() {
-  let newLegendContent = `<span>${stats.title}</span><br>`;
+  let newLegendContent = `<span>${stats.title}</span><br><ul>`;
   const reversedBreaks = stats.breakpoints.slice().reverse();
   for (let i = 0; i < stats.breakpoints.length; i += 1) {
-    newLegendContent += `<i style="background:${getColor(reversedBreaks[i] + 1, stats)}"></i> ${
+    newLegendContent += `<li><i style="background:${getColor(reversedBreaks[i] + 1, stats)}"></i> ${
       numberWithCommas(reversedBreaks[i])
-    }${reversedBreaks[i + 1] ? ` to ${numberWithCommas(reversedBreaks[i + 1])}<br>` : '+'}`;
+    }${reversedBreaks[i + 1] ? ` to ${numberWithCommas(reversedBreaks[i + 1])}</li>` : '+</li>'}`;
   }
+  newLegendContent += '</ul>';
   document.querySelectorAll('.info.legend.leaflet-control')[0].innerHTML = newLegendContent;
   map.setView(geojsonLayer.getBounds().getCenter(), 5);
 }
@@ -149,12 +150,14 @@ const legend = L.control({ position: 'topleft' });
 legend.onAdd = function () {
   const div = L.DomUtil.create('div', 'info legend');
   const reversedBreaks = stats.breakpoints.slice().reverse();
-  div.innerHTML += '<span>Percent Change 2005-2016</span><br>';
+  let legendContent = '<span>Percent Change 2005-2016</span><br>';
+  legendContent += '<ul>';
   for (let i = 0; i < stats.breakpoints.length; i += 1) {
-    div.innerHTML
-      += `<i style="background:${getColor(reversedBreaks[i] + 1, stats)}"></i> ${
-        reversedBreaks[i]}${reversedBreaks[i + 1] ? `% to ${reversedBreaks[i + 1]}%<br>` : '% and above'}`;
+    legendContent += `<li><i style="background:${getColor(reversedBreaks[i] + 1, stats)}"></i>`;
+    legendContent += `${reversedBreaks[i]}${reversedBreaks[i + 1] ? `% to ${reversedBreaks[i + 1]}%<br>` : '% and above'}</li>`;
   }
+  legendContent += '</ul>';
+  div.innerHTML += legendContent;
   return div;
 };
 
